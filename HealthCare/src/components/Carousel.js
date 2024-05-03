@@ -47,11 +47,15 @@ export default function Carousel({ data, children: Children, childrenStyle }) {
     );
   }, [data?.length, indexDot]);
 
-  const renderItem = ({ item }) => (
-    <Pressable style={styles.wrapItem}>
-      <View style={{ ...styles.item, width: '100%' }}>{Children}</View>
-    </Pressable>
-  );
+  const renderItem = ({ item }) => {
+    return (
+      <Pressable style={styles.wrapItem}>
+        <View style={{ ...styles.item, width: '100%' }}>
+          {Children && <Children.type data={item} isNavigate />}
+        </View>
+      </Pressable>
+    )
+  };
 
   return (
     <>

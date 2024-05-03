@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { blackText, blueText, color, colorTheme, grayText } from '../constant'
 
-export default function DoctorProfileCard({ isHeartTrue, onUpdate, isHeartRequire, isButtonRequire }) {
+export default function DoctorProfileCard({ isHeartTrue, onUpdate, isHeartRequire, isButtonRequire, data }) {
     // console.log(likes);
     const [like, setLike] = useState(isHeartTrue)
     const handleUnlike = () => {
@@ -17,9 +17,13 @@ export default function DoctorProfileCard({ isHeartTrue, onUpdate, isHeartRequir
         // <View style={[styles.subContainer, { elevation: 2, borderRadius: 20 }]}>
         <View style={{ padding: 10 }}>
             <View style={{ margin: 15, flexDirection: "row", height: 100, justifyContent: 'center', alignItems: "center", }}>
-                <Image source={require('../assets/img/health.jpg')} resizeMode='contain' style={styles.image} />
+                {!data.image === null ?
+                    <Image source={data.image} resizeMode='contain' style={styles.image} />
+                    :
+                    <Image source={require('../assets/img/DocData/d4.jpeg')} resizeMode='contain' style={styles.image} />
+                }
                 <View style={{ width: "60%", marginLeft: 16, height: 100 }}>
-                    <Text style={styles.bigText}>Dr. Jonny Wilson</Text>
+                    <Text style={styles.bigText}>{data.name}</Text>
                     <Text style={[styles.smallText, { marginTop: 1 }]}>DenTist</Text>
                     <View style={{ flexDirection: "row", alignItems: 'center', marginTop: 5 }}>
                         <MaterialIcons name="location-pin" color={colorTheme.primaryColor} size={25} />

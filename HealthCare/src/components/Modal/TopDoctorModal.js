@@ -7,6 +7,23 @@ import DoctorProfileCard from '../DoctorProfileCard';
 
 
 const TopDoctorModal = ({ modalVisible, setModalVisible }) => {
+const data = [
+  {
+    name: 'Dr.Narayanankutty',
+    job: "Heart Surgeon",
+    image: require('../../assets/img/DocData/d3.jpeg')
+  },
+  {
+    name: 'Dr Dileep Damodaran',
+    job: "Neaurologist",
+    image: require('../../assets/img/DocData/d4.jpeg')
+  },
+  {
+    name: 'Dr. Gautam Verma',
+    job: "Cardiologist",
+    image: require('../../assets/img/DocData/d2.jpeg')
+  },
+];
     return (
         <Modal
             animationType="slide"
@@ -36,7 +53,7 @@ const TopDoctorModal = ({ modalVisible, setModalVisible }) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
                     {[1, 2, 3, 4].map((_, index) => (
                         <View key={index}style={{ backgroundColor: 'white', elevation: 2, borderRadius: 10,marginTop:10 }}>
-                            <DoctorProfileCard isButtonRequire isHeartRequire />
+                            <DoctorProfileCard isButtonRequire isHeartRequire data={data} />
                         </View>
                     ))}
                 </ScrollView>

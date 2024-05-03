@@ -4,17 +4,17 @@ import { blackText, blueText, colorTheme, grayText } from '../../constant';
 import Header from '../../components/Header';
 import WebView from 'react-native-webview';
 
-const Medicine = () => {
+const SymptompAnalyzer = () => {
     return (
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <Header leftIconName header={'My Medicine'} titleMargin={30} />
+                <Header leftIconName header={'Symptoms Analysis'} titleMargin={30} />
             </View>
             {/* Main Content */}
             <View style={styles.content}>
                 <WebView
-                    source={{ uri: 'https://medicine-recommendation-yaruqfpxtvqgbhd7l5ub5y.streamlit.app/' }}
+                    source={{ uri: 'https://diseaseanalysisfromsymptoms-telehealth.streamlit.app/' }}
                     style={{ flex: 1 }}
                     originWhitelist={['*']}
                     scalesPageToFit={true}
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Medicine;
+export default SymptompAnalyzer;

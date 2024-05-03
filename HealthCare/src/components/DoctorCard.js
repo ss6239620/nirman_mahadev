@@ -5,17 +5,17 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native'
 
-export default function DoctorCard({isNavigate,  isButtonRequired,item }) {
- const navigation= useNavigation()
+export default function DoctorCard({ isNavigate, isButtonRequired, data }) {
+  const navigation = useNavigation()
   return (
-    <Pressable 
-    onPress={()=>{isNavigate?navigation.navigate('DoctorDetail'):null}}
-    style={styles.card}>
+    <Pressable
+      onPress={() => { isNavigate ? navigation.navigate('DoctorDetail', { data: data }) : null }}
+      style={styles.card}>
       <View style={{ flexDirection: 'row', margin: 15 }}>
-        <View style={{ marginRight: 12 }}>
+        <View style={{ marginRight: 12, flex: 1 }}>
           <View style={{ marginBottom: 8 }}>
-            <Text style={styles.boldText}>Dr. Charollette Baker</Text>
-            <Text style={styles.smallText}>Heart Surgeon</Text>
+            <Text style={styles.boldText}>{data.name.length < 20 ? data.name : data.name.slice(0, 20) + "..."}</Text>
+            <Text style={styles.smallText}>{data.job}</Text>
           </View>
           <View style={{ flexDirection: 'row' }}>
             <Icon name="star" size={20} color={'#EF802F'} style={{ marginRight: 10, marginTop: 6 }} />
@@ -25,7 +25,11 @@ export default function DoctorCard({isNavigate,  isButtonRequired,item }) {
             </View>
           </View>
         </View>
-        <Image source={require('../assets/img/health.jpg')} style={styles.image} />
+        <View style={{ display: 'flex', flex: 0.8, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ alignItems: 'center', height: 100, width: 150 }}>
+            <Image source={data.image} style={styles.image} />
+          </View>
+        </View>
       </View>
       <View style={styles.subCard}>
         <View style={{ flexDirection: "row" }}>
@@ -41,8 +45,8 @@ export default function DoctorCard({isNavigate,  isButtonRequired,item }) {
         <View style={[styles.subCard, { backgroundColor: 'white' }]}>
           <TouchableOpacity
             style={{ backgroundColor: colorTheme.primaryColor, width: 120, height: 40, borderRadius: 50, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: colorTheme.borderColor }}
-          // onPress={() => { setIsReshedule(true) }}
-          onPress={() => { navigation.navigate('RescheduledAppointment') }}
+            // onPress={() => { setIsReshedule(true) }}
+            onPress={() => { navigation.navigate('RescheduledAppointment') }}
           >
             <Text style={{ color: "white" }}>Reschedule</Text>
           </TouchableOpacity>
@@ -78,14 +82,17 @@ const styles = StyleSheet.create({
     backgroundColor: colorTheme.appBackGroundColor,
     height: "auto",
     borderRadius: 10,
-    elevation: 5
+    elevation: 5,
+    width: 350
   },
   image: {
-    width: '40%',
-    height: '100%'
+    width: 100,
+    height: 100,
+    borderRadius: 20
   },
   subCard: {
-    margin: 15,
+    marginHorizontal: 15,
+    marginBottom: 15,
     height: 50,
     backgroundColor: "#deecfa",
     flexDirection: 'row',

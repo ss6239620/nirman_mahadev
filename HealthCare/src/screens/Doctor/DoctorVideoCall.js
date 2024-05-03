@@ -20,6 +20,7 @@ import {
 import IconContainer from './IconContainer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import InCallManager from 'react-native-incall-manager';
+import { navigate } from '../../services/navRef';
 
 export default function App({ }) {
   const [localStream, setlocalStream] = useState(null);
@@ -34,7 +35,7 @@ export default function App({ }) {
 
   const otherUserId = useRef(null);
 
-  const socket = SocketIOClient('https://video-backend-7tsf.onrender.com', {
+  const socket = SocketIOClient('https://cypress-magnificent-hubcap.glitch.me/', {
     transports: ['websocket'],
     query: {
       callerId,
@@ -475,6 +476,7 @@ export default function App({ }) {
             backgroundColor={'red'}
             onPress={() => {
               leave();
+              navigate('DoctorPrescription')
             }}
             Icon={() => {
               return <MaterialIcons size={26} color='#fff' name='call-end' />

@@ -1,6 +1,6 @@
 import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import { blackText, blueText,  colorTheme, grayText } from '../../constant'
+import { blackText, blueText, colorTheme, grayText } from '../../constant'
 import Header from '../../components/Header'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -10,9 +10,9 @@ import WebView from 'react-native-webview'
 import DoctorRenameCard from '../../components/DoctorRenameCard'
 import DoctorProfileCard from '../../components/DoctorProfileCard'
 
-export default function DoctorDetail({ navigation }) {
+export default function DoctorDetail({ navigation, route }) {
     const Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
+    const { data } = route.params;
     const [like, setLike] = useState(false)
     const [search, setSearch] = useState('')
     const [textShown, setTextShown] = useState(false)
@@ -30,7 +30,7 @@ export default function DoctorDetail({ navigation }) {
                 <View style={[styles.subContainer, { marginTop: 2 }]}>
                     <Header header={"Doctor Details"} leftIconName={"chevron-back"} rightIconName={"share-social-outline"} />
                 </View>
-                <DoctorProfileCard />
+                <DoctorProfileCard data={data} />
                 <View style={styles.subContainer}>
                     <View style={{ height: 'auto', }}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>

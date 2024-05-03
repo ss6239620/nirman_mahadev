@@ -7,7 +7,7 @@ async function BookAppointment() {
     console.log('in BookAppointment');
     const token = await AsyncStorage.getItem("userToken");
     const body = {
-        doctor: "65cb89c7c108c144e836d1f0",
+        doctor: "6630f4d40688518c76cf8e1d",
         date: "10",
         time: "male",
         customschedule: "male",

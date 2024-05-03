@@ -11,13 +11,30 @@ export default function BookAppointment({navigation}) {
     const [customSchedule, setCustomSchedule] = useState('')
     const [selectDay, setSelectDay] = useState(0)
     const [selectTime, setSelectTime] = useState(0)
+    const data = [
+        {
+          name: 'Dr.Narayanankutty',
+          job: "Heart Surgeon",
+          image: require('../../assets/img/DocData/d3.jpeg')
+        },
+        {
+          name: 'Dr Dileep Damodaran',
+          job: "Neaurologist",
+          image: require('../../assets/img/DocData/d4.jpeg')
+        },
+        {
+          name: 'Dr. Gautam Verma',
+          job: "Cardiologist",
+          image: require('../../assets/img/DocData/d2.jpeg')
+        },
+      ];
     return (
         <View style={styles.container}>
             <ScrollView>
                 <View style={[styles.subContainer,]}>
                     <Header header={"Book Appointment"} leftIconName={"chevron-back"} titleMargin={30} />
                 </View>
-                <DoctorProfileCard />
+                <DoctorProfileCard  data={data}/>
                 <View style={[styles.subContainer, { marginTop: 30 }]}>
                     <View style={{ height: 'auto', }}>
                         <View style={{ flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>

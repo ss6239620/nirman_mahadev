@@ -35,12 +35,18 @@ import Favorites from '../Profile/Favorites'
 import ForgetPassword from '../Authentication/ForgetPassword'
 import DoctorHome from '../Doctor/DoctorHome'
 import Blogs from '../Doctor/Blogs'
-import Medicine from '../Doctor/Medicine'
+import PatientDataAnalysis from '../Doctor/PatientDataAnalysis'
 import DoctorChatRoom from '../Doctor/DoctorChatRoom'
 import DoctorVideoCall from '../Doctor/DoctorVideoCall'
 import SOSSettings from '../Profile/SOSSettings'
 import ChatBot from '../Chat/ChatBot'
 import ElectronicReport from '../Profile/ElectronicReport'
+import DoctorPrescription from '../Doctor/DoctorPrescription'
+import PatientInfo from '../../components/PatientInfo'
+import DoctorAppointmentDetailScreen from '../Doctor/DoctorAppointmentDetailScreen'
+import SymptompAnalyzer from '../Doctor/SymptompAnalyzer'
+import AdvancedAnalyzer from '../Doctor/AdvancedAnalyzer'
+import PatientDocument from '../Doctor/PatientDocument'
 
 const Stack = createNativeStackNavigator()
 
@@ -85,9 +91,15 @@ export default function App() {
         <Stack.Screen name='DoctorLogin' component={DoctorLogin} options={{ headerShown: false }} />
         <Stack.Screen name='DoctorCompleteProfile' component={DoctorCompleteProfile} options={{ headerShown: false }} />
         <Stack.Screen name='DoctorChatRoom' component={DoctorChatRoom} options={{ headerShown: false }} />
-        <Stack.Screen name='Medicine' component={Medicine} options={{ headerShown: false }} />
+        <Stack.Screen name='DoctorPrescription' component={DoctorPrescription} options={{ headerShown: false }} />
+        <Stack.Screen name='PatientDataAnalysis' component={PatientDataAnalysis} options={{ headerShown: false }} />
         <Stack.Screen name='ChatBot' component={ChatBot} options={{ headerShown: false }} />
         <Stack.Screen name='ElectronicReport' component={ElectronicReport} options={{ headerShown: false }} />
+        <Stack.Screen name='PatientInfo' component={PatientInfo} options={{ headerShown: false }} />
+        <Stack.Screen name='SymptompAnalyzer' component={SymptompAnalyzer} options={{ headerShown: false }} />
+        <Stack.Screen name='AdvancedAnalyzer' component={AdvancedAnalyzer} options={{ headerShown: false }} />
+        <Stack.Screen name='PatientDocument' component={PatientDocument} options={{ headerShown: false }} />
+        <Stack.Screen name='DoctorAppointmentDetailScreen' component={DoctorAppointmentDetailScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
   )
 }

@@ -22,16 +22,19 @@ import LottieView from 'lottie-react-native'
 
 const data = [
   {
-    name: 'Dr. Charollette Baker',
+    name: 'Dr.Narayanankutty',
     job: "Heart Surgeon",
+    image: require('../../assets/img/DocData/d3.jpeg')
+  },
+  {
+    name: 'Dr Dileep Damodaran',
+    job: "Neaurologist",
+    image: require('../../assets/img/DocData/d4.jpeg')
   },
   {
     name: 'Dr. Gautam Verma',
-    job: "Heart Surgeon",
-  },
-  {
-    name: 'Dr. Gautam Verma',
-    job: "Heart Surgeon",
+    job: "Cardiologist",
+    image: require('../../assets/img/DocData/d2.jpeg')
   },
 ];
 
@@ -42,8 +45,8 @@ function Test(params) {
 
 async function SendSOS(params) {
   // sendSmsData(SMSDATA)
-  const phoneno=await AsyncStorage.getItem('SOSNumber')
-  const phone=JSON.parse(phoneno)
+  const phoneno = await AsyncStorage.getItem('SOSNumber')
+  const phone = JSON.parse(phoneno)
 
   const SMSDATA = phone.phoneNumber.map(number => ({
     phone: number,
@@ -185,8 +188,13 @@ export default function Home({ navigation }) {
             style={[{ color: colorTheme.primaryColor, fontSize: 15 }]}>See All</Text>
         </View>
         <Carousel data={data}>
-          <DoctorCard isNavigate />
+          <DoctorCard />
         </Carousel>
+        {/* {data.map((item) => (
+          <View key={item.name}>
+            <DoctorCard isNavigate item={item} />
+          </View>
+        ))} */}
 
         <View style={{}}>
           <View style={{ width: '90%', flexDirection: "row", justifyContent: 'space-between', padding: 10 }}>

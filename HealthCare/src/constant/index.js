@@ -37,6 +37,8 @@ const blueText = {
 
 const API_URL = 'https://telehealth.cyclic.app/api'
 
+const FILE_API_URL='https://backend-telehealth.onrender.com/api'
+
 const API_AIML_URL = 'http://sharvesh211.pythonanywhere.com'
 
 
@@ -44,4 +46,4 @@ const HEALTH_NEWS_API_KEY = 'bbccd839479b4090953b15b61a3b35fb'
 
 
 
-export { blackText, grayText, blueText, colorTheme, API_URL, HEALTH_NEWS_API_KEY, API_AIML_URL }
+export { blackText, grayText, blueText, colorTheme, API_URL, HEALTH_NEWS_API_KEY, API_AIML_URL,FILE_API_URL }
