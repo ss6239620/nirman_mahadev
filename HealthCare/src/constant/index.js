@@ -35,7 +35,7 @@ const blueText = {
     fontWeight: "600",
 }
 
-const API_URL = 'https://telehealth.cyclic.app/api'
+const API_URL = 'https://backend-telehealth.onrender.com/api'
 
 const FILE_API_URL='https://backend-telehealth.onrender.com/api'
 

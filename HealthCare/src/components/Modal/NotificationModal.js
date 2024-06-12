@@ -13,31 +13,58 @@ const NotificationModal = ({ modalVisible, setModalVisible }) => {
     const [isRead, setIsRead] = useState(false)
     const [notifyData, setnotifyData] = useState([])
     const [fetchnotification, setfetchnotification] = useState(false)
+    const [fetchrequestPermission, setfetchrequestPermission] = useState([])
+    const [loadrequest, setloadrequest] = useState(false)
 
-    function Notification({ iconBackGroundColor, iconColor, iconName, Date, isDate, data }) {
+    function Notification({ iconBackGroundColor, iconColor, iconName, Date, isDate, data, request }) {
         return (
-            <View style={{  }}>
-                {isDate ?
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 30, alignItems: 'center' }}>
-                        <Text style={[styles.bigText, { color: "gray" }]}>Today</Text>
-                        <Text style={[styles.blueText, { fontSize: 15 }]} onPress={() => updateReadStatus(data._id)}>Mark as read</Text>
-                    </View>
-                    : null
-                }
-                <View style={{ flexDirection: "row",  elevation: 1, borderRadius: 10, padding: 10, marginBottom: 10,backgroundColor: data.readstatus === 'unread' ? 'white' : colorTheme.borderColor  }}>
-                    <View style={{ backgroundColor: iconBackGroundColor, borderRadius: 50, width: 50, height: 50 }}>
-                        <MaterialIcons name={iconName} size={20} color={iconColor} style={{ padding: 15 }} />
-                    </View>
-                    <View style={{ width: '80%', marginLeft: 10 }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={styles.bigText}>{data.title}</Text>
-                            <Text style={{}}>1h</Text>
+            <>
+                {!request ?
+                    <View style={{}}>
+                        {isDate ?
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 30, alignItems: 'center' }}>
+                                <Text style={[styles.bigText, { color: "gray" }]}>Today</Text>
+                                <Text style={[styles.blueText, { fontSize: 15 }]} onPress={() => updateReadStatus(data._id)}>Mark as read</Text>
+                            </View>
+                            : null
+                        }
+                        <View style={{ flexDirection: "row", elevation: 1, borderRadius: 10, padding: 10, marginBottom: 10, backgroundColor: data.readstatus === 'unread' ? 'white' : colorTheme.borderColor }}>
+                            <View style={{ backgroundColor: iconBackGroundColor, borderRadius: 50, width: 50, height: 50 }}>
+                                <MaterialIcons name={iconName} size={20} color={iconColor} style={{ padding: 15 }} />
+                            </View>
+                            <View style={{ width: '80%', marginLeft: 10 }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.bigText}>{data.title}</Text>
+                                    <Text style={{}}>1h</Text>
+                                </View>
+                                <Text style={[styles.smallText,]}>{data.prescription[0]}</Text>
+                                <Text style={[styles.smallText,]}>{data.prescription[1]}</Text>
+                            </View>
                         </View>
-                        <Text style={[styles.smallText,]}>{data.prescription[0]}</Text>
-                        <Text style={[styles.smallText,]}>{data.prescription[1]}</Text>
                     </View>
-                </View>
-            </View>
+                    :
+                    <View style={{}}>
+                        {isDate ?
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 30, alignItems: 'center' }}>
+                                <Text style={[styles.bigText, { color: "gray" }]}>Request for Document</Text>
+                            </View>
+                            : null
+                        }
+                        <View style={{ flexDirection: "row", elevation: 1, borderRadius: 10, padding: 10, marginBottom: 10, backgroundColor: 'white'  }}>
+                            <View style={{ backgroundColor: iconBackGroundColor, borderRadius: 50, width: 50, height: 50 }}>
+                                <MaterialIcons name={iconName} size={20} color={iconColor} style={{ padding: 15 }} />
+                            </View>
+                            <View style={{ width: '80%', marginLeft: 10 }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.bigText}>{'Dr. Akash'}</Text>
+                                    <Text style={{}}>1h</Text>
+                                </View>
+                                <Text style={[styles.smallText,]}>{'akash@gmail.com'}</Text>
+                            </View>
+                        </View>
+                    </View>
+                }
+            </>
         )
     }
 
@@ -59,6 +86,7 @@ const NotificationModal = ({ modalVisible, setModalVisible }) => {
             console.log(error.response.data);
         }
     }
+
     async function updateReadStatus(id) {
         try {
             const token = await AsyncStorage.getItem("userToken");
@@ -78,8 +106,28 @@ const NotificationModal = ({ modalVisible, setModalVisible }) => {
             console.log(error.response.data);
         }
     }
+
+    async function getPermissionRequest(params) {
+        try {
+            setloadrequest(false)
+            console.log('fetching request...');
+            const token = await AsyncStorage.getItem("userToken");
+            const config = {
+                headers: {
+                    'auth-token': token,
+                }
+            }
+            const res = await axios.get(`${API_URL}/user/getpermissioninfo`, config)
+            console.log(res.data);
+            setfetchrequestPermission(res.data)
+            setloadrequest(true)
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
     useEffect(() => {
         getAllNotification()
+        getPermissionRequest()
     }, [])
 
     return (
@@ -92,7 +140,7 @@ const NotificationModal = ({ modalVisible, setModalVisible }) => {
             }}>
 
             <View style={styles.container}>
-                {fetchnotification ?
+                {fetchnotification && loadrequest ?
                     <ScrollView style={styles.subContainer} showsVerticalScrollIndicator={false}>
                         <View
                             style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: 'space-between' }}
@@ -110,6 +158,12 @@ const NotificationModal = ({ modalVisible, setModalVisible }) => {
                         {
                             notifyData.map((data, index) => (
                                 <Notification key={index} iconName={'notifications'} iconColor={"#1ce823"} iconBackGroundColor={'#c1f7c3'} isDate Date={'Today'} data={data} />
+                            ))
+
+                        }
+                        {
+                            fetchrequestPermission.map((data, index) => (
+                                <Notification key={index} iconName={'notifications'} iconColor={"#1ce823"} iconBackGroundColor={'#c1f7c3'} isDate Date={'Today'} data={data} request />
                             ))
 
                         }

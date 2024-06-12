@@ -67,13 +67,14 @@ const ElectronicReport = () => {
 
   async function getAllFile(params) {
     try {
+      console.log('inside file');
       const token = await AsyncStorage.getItem("userToken");
       const config = {
         headers: {
           'auth-token': token,
         }
       }
-      const res = await axios.get(`${API_URL}/user/getallmyehr`, config)
+      const res = await axios.get(`${FILE_API_URL}/user/getallmyehr`, config)
       console.log(res.data);
       setfilesData(res.data)
       setfileFetched(true)

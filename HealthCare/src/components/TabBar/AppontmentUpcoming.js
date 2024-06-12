@@ -5,6 +5,23 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import DoctorCard from '../../components/DoctorCard'
 
 const days = ["Mon", "Tue", "Wed", "Th", "Fr", "Sat", "Sun"]
+const data = [
+  {
+    name: 'Dr.Narayanankutty',
+    job: "Heart Surgeon",
+    image: require('../../assets/img/DocData/d3.jpeg')
+  },
+  {
+    name: 'Dr Dileep Damodaran',
+    job: "Neaurologist",
+    image: require('../../assets/img/DocData/d4.jpeg')
+  },
+  {
+    name: 'Dr. Gautam Verma',
+    job: "Cardiologist",
+    image: require('../../assets/img/DocData/d2.jpeg')
+  },
+];
 export default function Appointment({ navigation }) {
   const date = new Date().getDate()
   return (
@@ -32,10 +49,10 @@ export default function Appointment({ navigation }) {
           <Text style={[styles.bigText, { marginTop: 15 }]}>Remainder</Text>
           <Text style={styles.smallText}>Dont forget schedule for upcoming appointment </Text>
           <View style={{ marginTop: 15, marginBottom: 15 }}>
-            <DoctorCard navigation={navigation} isButtonRequired />
+            <DoctorCard navigation={navigation} isButtonRequired data={data[0]} />
           </View>
           <View style={{ marginTop: 15, marginBottom: 15 }}>
-            <DoctorCard navigation={navigation} isButtonRequired />
+            <DoctorCard navigation={navigation} isButtonRequired data={data[1]} />
           </View>
         </View>
       </ScrollView>

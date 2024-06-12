@@ -33,7 +33,7 @@ export default function App({ }) {
   );
   const otherUserId = useRef(null);
 
-  const socket = SocketIOClient('https://cypress-magnificent-hubcap.glitch.me', {
+  const socket = SocketIOClient('https://cypress-magnificent-hubcap.glitch.me/', {
     transports: ['websocket'],
     query: {
       callerId,

@@ -34,6 +34,30 @@ export default function PatientDocument({ navigation, route }) {
             console.log(error.response.data);
         }
     }
+
+    async function requestAccess(ehr,user) {
+        try {
+            console.log('fetching....');
+            const token = await AsyncStorage.getItem("doctorToken");
+            const config = {
+                headers: {
+                    'auth-token': token,
+                }
+            }
+            const body = {
+                ehr: ehr,
+                user: user,
+            }
+
+            const res = await axios.post(`${API_URL}/doctor/requestpermission`, body, config)
+            console.log('request send---->', res.data);
+            // After updating permission, fetch all files again
+        
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+    
     useEffect(() => {
         getAllDocument()
     }, [])
@@ -59,7 +83,9 @@ export default function PatientDocument({ navigation, route }) {
                                     {data.permission === 'public' && <View style={{marginTop:10}}><OpenLink url={`https://backend-telehealth.onrender.com/uploads/${data.ehr}`} /></View>}
 
                                     {data.permission === 'private' &&
-                                        <TouchableOpacity style={{ backgroundColor: colorTheme.primaryColor, borderRadius: 10, marginTop: 10 }}>
+                                        <TouchableOpacity
+                                        onPress={()=>{requestAccess(data._id,user_id)}}
+                                        style={{ backgroundColor: colorTheme.primaryColor, borderRadius: 10, marginTop: 10 }}>
                                             <Text style={{ color: 'white', padding: 10, textAlign: 'center' }}>Request Access</Text>
                                         </TouchableOpacity>
                                     }
